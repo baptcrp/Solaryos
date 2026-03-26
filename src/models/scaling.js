@@ -12,3 +12,12 @@ export const calculate3DDistance = (realDistance) => {
   const logDist = Math.log10(realDistance);
   return (logDist - 7.5) * 20; 
 };
+
+// Calcule la distance des lunes
+export const calculateMoonDistance = (moonDistance, planetSize) => {
+  // On compresse la distance pour qu'elle soit visuellement agréable (puissance 0.3)
+  const scaledDist = Math.pow(moonDistance, 0.3) * 0.02;
+  
+  // On ajoute la taille de la planète pour éviter colision
+  return planetSize + 0.2 + scaledDist;
+};

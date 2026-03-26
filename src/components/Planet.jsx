@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { calculate3DSize, calculate3DDistance } from '../models/scaling';
 import { getOrbitSpeed, getRotationSpeed } from '../models/physics';
 import { generateCanvasTexture, generateCelGradientMap } from '../models/texture';
+import Moon from './Moon';
 
 // Affiche et anime une planète
 export default function Planet({ data }) {
@@ -63,15 +64,21 @@ export default function Planet({ data }) {
       {/* Point central */}
       <group ref={planetPivotRef} rotation-y={randomStartAngle.current}>
         
-        {/* Sphère */}
-        <mesh ref={planetMeshRef} position={[distance, 0, 0]}>
-          <sphereGeometry args={[size, 64, 64]} />
+        {/* Groupe de la planète */}
+        <group position={[distance, 0, 0]}>
           
-          <meshToonMaterial 
-            map={planetTexture} // L'image de surface
-            gradientMap={celGradient} // L'image du Cel-Shading
-          />
-        </mesh>
+          {/* Sphère */}
+          <mesh ref={planetMeshRef}>
+            <sphereGeometry args={[size, 64, 64]} />
+            <meshToonMaterial map={planetTexture} gradientMap={celGradient} />
+          </mesh>
+
+          {/* On génère toutes les lunes autour du groupe */}
+          {data.moons && data.moons.map((moonData) => (
+            <Moon key={moonData.id} data={moonData} planetSize={size} />
+          ))}
+
+        </group>
 
       </group>
     </group>
