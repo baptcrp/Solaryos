@@ -6,10 +6,10 @@ import { getPlanetColors } from './color';
 // Configuration
 const CONFIG = {
   rocky: {
-    minContinents: 15,
-    maxContinents: 35,
-    minRadius: 10,   
-    maxRadius: 45,  
+    minContinents: 20,
+    maxContinents: 40,
+    minRadius: 20,   
+    maxRadius: 60,  
   },
   gas: {
     minBands: 4,
